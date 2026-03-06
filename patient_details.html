@@ -49,7 +49,17 @@
         <h1>Détails du patient</h1>
 
         <div class="top-actions">
-          <div id="tabMeds" class="tab-panel hidden">
+          
+        </div>
+      </header>
+
+      <section class="section">
+        <div class="tabs">
+          <button class="tab-btn" data-tab="tabMeds" type="button">Médicaments</button>
+          <button class="tab-btn" data-tab="tabRecord" type="button">Dossier médical</button>
+        </div>
+
+       <div id="tabMeds" class="tab-panel hidden">
 
   <h2 class="section-title">Médicaments</h2>
 
@@ -62,20 +72,6 @@
   <div class="grid" id="medsGrid"></div>
 
 </div>
-        </div>
-      </header>
-
-      <section class="section">
-        <div class="tabs">
-          <button class="tab-btn" data-tab="tabMeds" type="button">Médicaments</button>
-          <button class="tab-btn" data-tab="tabRecord" type="button">Dossier médical</button>
-        </div>
-
-        <div id="tabMeds" class="tab-panel hidden">
-          <h2 class="section-title">Médicaments</h2>
-          <div class="grid" id="medsGrid"></div>
-        </div>
-
         <div id="tabRecord" class="tab-panel hidden">
           <div class="card" style="flex-direction:column;">
             <div class="record-actions" style="gap:10px;">
