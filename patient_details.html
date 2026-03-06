@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Détails Patient</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="dashboard">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-card patient-side-card">
+        <div class="patient-side-top">
+          <div class="patient-photo side-photo">
+            <img id="pPhoto" class="hidden" alt="Photo patient" />
+            <div id="pPhotoFallback" class="photo-fallback">👤</div>
+          </div>
+
+          <div class="patient-side-head">
+            <h2 id="pNameSide">---</h2>
+            <p><strong>N° dossier :</strong> <span id="pDossierSide">---</span></p>
+          </div>
+        </div>
+
+        <div class="doc-info patient-side-info">
+          <p><strong>Téléphone :</strong> <span id="pPhoneSide">---</span></p>
+          <p><strong>Nom superviseur :</strong> <span id="pSupervisorNameSide">---</span></p>
+          <p><strong>Tél superviseur :</strong> <span id="pSupervisorPhoneSide">---</span></p>
+          <p><strong>Date naissance :</strong> <span id="pBirthDateSide">---</span></p>
+          <p><strong>Maladie :</strong> <span id="pDiseaseSide">---</span></p>
+          <p><strong>Notes :</strong> <span id="pNotesSide">---</span></p>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <button class="menu-item" id="btnEditPatient" type="button">
+          <span class="icon">✏️</span><span>Modifier patient</span>
+        </button>
+
+        <a class="menu-item" href="dashboard.html">
+          <span class="icon">⬅️</span><span>Retour</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1>Détails du patient</h1>
+
+        <div class="top-actions">
+          <div id="tabMeds" class="tab-panel hidden">
+
+  <h2 class="section-title">Médicaments</h2>
+
+  <div style="margin-bottom:20px;">
+    <button class="btn primary hidden" id="btnAddMed" type="button">
+      Ajouter médicament
+    </button>
+  </div>
+
+  <div class="grid" id="medsGrid"></div>
+
+</div>
+        </div>
+      </header>
+
+      <section class="section">
+        <div class="tabs">
+          <button class="tab-btn" data-tab="tabMeds" type="button">Médicaments</button>
+          <button class="tab-btn" data-tab="tabRecord" type="button">Dossier médical</button>
+        </div>
+
+        <div id="tabMeds" class="tab-panel hidden">
+          <h2 class="section-title">Médicaments</h2>
+          <div class="grid" id="medsGrid"></div>
+        </div>
+
+        <div id="tabRecord" class="tab-panel hidden">
+          <div class="card" style="flex-direction:column;">
+            <div class="record-actions" style="gap:10px;">
+              <button class="btn" id="btnEditRecord" type="button">Modifier</button>
+              <button class="btn primary" id="btnSaveRecord" type="button" disabled>Enregistrer dossier</button>
+            </div>
+
+            <p class="small" id="recordStatus" style="border-top:none;padding-top:0;"></p>
+
+            <div class="record-grid">
+              <div class="field">
+                <span class="icon">🧾</span>
+                <input id="mrTitle" type="text" placeholder="Titre" disabled />
+              </div>
+
+              <div class="field">
+                <span class="icon">🩺</span>
+                <input id="mrDiagnosis" type="text" placeholder="Diagnostic" disabled />
+              </div>
+
+              <div class="field">
+                <span class="icon">⚠️</span>
+                <input id="mrAllergies" type="text" placeholder="Allergies" disabled />
+              </div>
+
+              <div class="field">
+                <span class="icon">📚</span>
+                <input id="mrHistory" type="text" placeholder="Antécédents" disabled />
+              </div>
+
+              <div class="field field-textarea">
+                <span class="icon">📝</span>
+                <textarea id="mrNotes" placeholder="Notes" disabled></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <div id="medModal" class="modal hidden">
+    <div class="modal-backdrop" id="closeMedModal"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">Ajouter un médicament</div>
+        <button class="btn" id="xMedModal" type="button">X</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="medForm">
+          <div class="field">
+            <span class="icon">💊</span>
+            <input id="mName" type="text" placeholder="Nom médicament" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🧪</span>
+            <input id="mDose" type="text" placeholder="Dose" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">⏱️</span>
+            <input id="mTimes" type="number" min="1" value="1" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📅</span>
+            <input id="mStart" type="date" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📅</span>
+            <input id="mEnd" type="date" required />
+          </div>
+
+          <button class="auth-btn" type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="editMedModal" class="modal hidden">
+    <div class="modal-backdrop" id="closeEditMedModal"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">Modifier médicament</div>
+        <button class="btn" id="xEditMedModal" type="button">X</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="editMedForm">
+          <div class="field">
+            <span class="icon">💊</span>
+            <input id="eName" type="text" placeholder="Nom médicament" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🧪</span>
+            <input id="eDose" type="text" placeholder="Dose" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">⏱️</span>
+            <input id="eTimes" type="number" min="1" value="1" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📅</span>
+            <input id="eStart" type="date" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📅</span>
+            <input id="eEnd" type="date" required />
+          </div>
+
+          <button class="auth-btn" type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="editPatientModal" class="modal hidden">
+    <div class="modal-backdrop" id="closeEditPatientModal"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">Modifier patient</div>
+        <button class="btn" id="xEditPatientModal" type="button">X</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="editPatientForm">
+          <div class="field">
+            <span class="icon">👤</span>
+            <input id="epFullName" type="text" placeholder="Nom & Prénom" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📞</span>
+            <input id="epPhone" type="text" placeholder="Téléphone patient" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">👨‍👩‍👧</span>
+            <input id="epSupervisorName" type="text" placeholder="Nom superviseur" />
+          </div>
+
+          <div class="field">
+            <span class="icon">☎️</span>
+            <input id="epSupervisorPhone" type="text" placeholder="Téléphone superviseur" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🎂</span>
+            <input id="epBirthDate" type="date" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🗂️</span>
+            <input id="epDossier" type="text" placeholder="N° dossier" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🦠</span>
+            <input id="epDisease" type="text" placeholder="Maladie" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📝</span>
+            <input id="epNotes" type="text" placeholder="Notes" />
+          </div>
+
+          <div class="field">
+            <span class="icon">🖼️</span>
+            <input id="epPhoto" type="file" accept="image/*" />
+          </div>
+
+          <button class="auth-btn" type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirmDialog" class="modal hidden">
+    <div class="modal-backdrop" id="confirmBackdrop"></div>
+    <div class="modal-card" style="width:min(520px,92vw);">
+      <div class="modal-head">
+        <div class="modal-title" id="confirmTitle">Confirmation</div>
+        <button class="btn" id="confirmX" type="button">X</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="small" id="confirmMsg" style="border-top:none;padding-top:0;margin-bottom:8px;"></p>
+        <p class="small" id="confirmDesc"></p>
+        <div class="card-actions" style="justify-content:flex-end;margin-top:14px;">
+          <button class="btn" id="confirmCancel" type="button">Annuler</button>
+          <button class="btn-sm danger" id="confirmOk" type="button">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="patient_details.js"></script>
+</body>
+</html>

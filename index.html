@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth">
+
+  <main class="auth-card">
+    <div class="brand" aria-hidden="true">
+      <div class="cloud"></div>
+      <div class="plus">+</div>
+    </div>
+
+    <h1 class="auth-title">Connexion</h1>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <form id="loginForm">
+      <div class="field">
+        <span class="icon">👤</span>
+        <input type="email" id="email" name="email" placeholder="Email" required />
+      </div>
+
+      <div class="field">
+        <span class="icon">🔒</span>
+        <input type="password" id="password" name="password" placeholder="Mot de passe" required />
+      </div>
+
+      <a class="auth-link" href="#" id="forgotLink">Mot de passe oublié ?</a>
+      <a class="auth-link" href="#" id="resendVerify">Renvoyer email de vérification</a>
+
+      <button class="auth-btn" type="submit">Se connecter</button>
+
+      <p class="auth-foot">
+        Pas de compte ? <a href="signup.html">Créer un compte</a> →
+      </p>
+    </form>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

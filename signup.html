@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Créer un compte</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth">
+
+  <main class="auth-card wide">
+    <div class="brand" aria-hidden="true">
+      <div class="cloud"></div>
+      <div class="plus">+</div>
+    </div>
+
+    <h1 class="auth-title">Créer un compte</h1>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <form id="signupForm">
+      <div class="field"><span class="icon">📧</span><input id="email" name="email" type="email" placeholder="Email" required /></div>
+      <div class="field"><span class="icon">👤</span><input id="Prénom" name="Prénom" type="text" placeholder="Prénom" required /></div>
+      <div class="field"><span class="icon">👤</span><input id="name" name="name" type="text" placeholder="Nom" required /></div>
+      <div class="field"><span class="icon">🩺</span><input id="speciality" name="speciality" type="text" placeholder="Spécialité" required /></div>
+      <div class="field"><span class="icon">🪪</span><input id="inviteCode" name="inviteCode" type="text" placeholder="Code invitation" required /></div>
+      <div class="field"><span class="icon">📞</span><input id="phone" name="phone" type="text" placeholder="Téléphone" required /></div>
+      <div class="field"><span class="icon">🔒</span><input id="password" name="password" type="password" placeholder="Mot de passe" required /></div>
+      <div class="field"><span class="icon">🔒</span><input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirmer le mot de passe" required /></div>
+
+      <button class="auth-btn" type="submit">S'inscrire</button>
+
+      <p class="auth-foot">
+        Vous avez déjà un compte ? <a href="index.html">Se connecter</a>
+      </p>
+    </form>
+  </main>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

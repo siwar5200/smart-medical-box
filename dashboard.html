@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Médecin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h2>Médecin</h2>
+        <div class="doc-info">
+          <p><strong>Nom :</strong> <span id="doctorName">---</span></p>
+          <p><strong>Spécialité :</strong> <span id="doctorSpeciality">---</span></p>
+        </div>
+      </div>
+
+      <nav class="menu">
+        <a class="menu-item active" href="#">
+          <span class="icon">🏠</span><span>Tableau de bord</span>
+        </a>
+
+        <a class="menu-item danger" href="#" id="btnLogout">
+          <span class="icon">⏻</span><span>Déconnexion</span>
+        </a>
+
+        <a class="menu-item danger" href="#" id="btnDeleteAccount">
+          <span class="icon">🗑️</span><span>Supprimer compte</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1>Gestion des patients</h1>
+      </header>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Liste des patients</h2>
+          <button class="btn primary" id="btnAdd" type="button">Ajouter patient</button>
+        </div>
+
+        <div class="grid" id="patientsGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <div id="patientModal" class="modal hidden">
+    <div class="modal-backdrop" id="closePatientModal"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">Ajouter un patient</div>
+        <button class="btn" id="xPatientModal" type="button">X</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="patientForm">
+          <div class="field">
+            <span class="icon">👤</span>
+            <input id="pFullName" type="text" placeholder="Nom & Prénom" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📞</span>
+            <input id="pPhone" type="text" placeholder="Téléphone patient" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">👨‍👩‍👧</span>
+            <input id="pSupervisorName" type="text" placeholder="Nom superviseur" />
+          </div>
+
+          <div class="field">
+            <span class="icon">☎️</span>
+            <input id="pSupervisorPhone" type="text" placeholder="Téléphone superviseur" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🎂</span>
+            <input id="pBirthDate" type="date" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🗂️</span>
+            <input id="pDossier" type="text" placeholder="N° dossier" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">🦠</span>
+            <input id="pDisease" type="text" placeholder="Maladie" required />
+          </div>
+
+          <div class="field">
+            <span class="icon">📝</span>
+            <input id="pNotes" type="text" placeholder="Notes (optionnel)" />
+          </div>
+
+          <div class="field">
+            <span class="icon">🖼️</span>
+            <input id="pPhoto" type="file" accept="image/*" />
+          </div>
+
+          <button class="auth-btn" type="submit">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirmDialog" class="modal hidden">
+    <div class="modal-backdrop" id="confirmBackdrop"></div>
+    <div class="modal-card" style="width:min(520px,92vw);">
+      <div class="modal-head">
+        <div class="modal-title" id="confirmTitle">Confirmation</div>
+        <button class="btn" id="confirmX" type="button">X</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="small" id="confirmMsg" style="border-top:none;padding-top:0;margin-bottom:8px;"></p>
+        <p class="small" id="confirmDesc"></p>
+
+        <div class="card-actions" style="justify-content:flex-end;margin-top:14px;">
+          <button class="btn" id="confirmCancel" type="button">Annuler</button>
+          <button class="btn-sm danger" id="confirmOk" type="button">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
